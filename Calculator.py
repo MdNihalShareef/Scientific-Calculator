@@ -30,13 +30,6 @@ def calculate(s):
             l.append(str(math.log(float(x),float(base))))
             i=j+1+s[j+1:].index(")")+1
         elif s[j]=="(" and j!=0:
-            if s[j-1] in "+-x/^":
-                l.append(s[i:j-1])
-                l.append(s[j-1])
-                l.append("(")
-                i=j+1
-            else:
-                l.append(s[i:j])
                 l.append("(")
                 i=j+1
         elif s[j] in ["+","-","/","x","^"]:
@@ -91,7 +84,9 @@ def solve(s):
             s[i]=math.cos(math.radians(int(s[i][s[i].index("s")+1:])))
         elif "tan" in s[i]:
             po=int(s[i][s[i].index("n")+1:])
-            if po%90!=0:
+            if  (po//90)%2==0:
+                s[i]=0
+            elif (po//90)%2!=1:
                 s[i]=math.tan(math.radians(int(s[i][s[i].index("n")+1:])))
             else:
                 s[i]="Error"
@@ -119,7 +114,7 @@ def solve(s):
             stack.append(b**a)
         else:
             stack.append(float(s[i]))
-        return str(stack[0])
+    return str(stack[-1])
 def setValue(a):
     global ent
     ent.insert(END,a)
