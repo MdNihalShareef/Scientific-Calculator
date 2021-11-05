@@ -1,5 +1,5 @@
 # Scientific-Calculator using Python - Tkinter
-## Min specs 
+## Minimum specifications 
 Python to be installed
 <br>
 Tkinter library to be installed
