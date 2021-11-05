@@ -7,7 +7,6 @@ Tkinter library to be installed
 If the library is not installed run the following command on cmd to install it
 <br>
 ### pip install Tkinter
-<br>
 ## To run the appilcation
 downlaod the above file and execute it(via python interpretor)
 <br>
