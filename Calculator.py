@@ -9,12 +9,12 @@ def calculate(s):
                 l.append(s[i:j])
                 l.append(s[j])
                 i=j+1
-        elif s[j]=="e":
-            l.append("2.718")
-            i=j+1
         elif s[j]=="-" and j==0:
             temp=calculate(s[1:])
-            temp[0]="-"+temp[0]
+            if temp[0]=="(":
+                temp.insert(0,"-")
+            else:
+                temp[0]="-"+temp[0]
             while "" in temp:
                 temp.remove("")
             return temp
@@ -47,6 +47,10 @@ def calculate(s):
                 l.append(s[j])
                 i=j+1
     l.append(s[i:])
+    for i in range(len(l)):
+        if l[i]=="-" and l[i-1]=="(":
+            l[i+1]="-"+l[i+1]
+            l[i]=""
     while "" in l:
         l.remove("")
     return l
@@ -73,21 +77,24 @@ def toPostfix(l):
         else:
             str+=i+" "
     while len(stack)!=0:
-        str+=stack.pop(-1)
+        str+=stack.pop(-1)+" "
     return str
 def solve(s):
     s=s.split()
     for i in range(len(s)):
+        if "e" in s[i]:
+            s[i]=s[i].replace("e","2.714")
+    for i in range(len(s)):
         if "sin" in s[i]:
-            s[i]=math.sin(math.radians(int(s[i][s[i].index("n")+1:])))
+            s[i]=math.sin(math.radians(float(s[i][s[i].index("n")+1:])))
         elif "cos" in s[i]:
-            s[i]=math.cos(math.radians(int(s[i][s[i].index("s")+1:])))
+            s[i]=math.cos(math.radians(float(s[i][s[i].index("s")+1:])))
         elif "tan" in s[i]:
             po=int(s[i][s[i].index("n")+1:])
             if  (po//90)%2==0:
                 s[i]=0
             elif (po//90)%2!=1:
-                s[i]=math.tan(math.radians(int(s[i][s[i].index("n")+1:])))
+                s[i]=math.tan(math.radians(float(s[i][s[i].index("n")+1:])))
             else:
                 s[i]="Error"
     stack=[]
