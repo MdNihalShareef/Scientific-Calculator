@@ -91,12 +91,13 @@ def solve(s):
             s[i]=math.cos(math.radians(float(s[i][s[i].index("s")+1:])))
         elif "tan" in s[i]:
             po=int(s[i][s[i].index("n")+1:])
-            if  (po//90)%2==0:
+            if  po%2==0 and (po/2)%2==0:
                 s[i]=0
-            elif (po//90)%2!=1:
-                s[i]=math.tan(math.radians(float(s[i][s[i].index("n")+1:])))
-            else:
+            elif po%2==0 and (po/2)%2==1:
                 s[i]="Error"
+            else:
+                s[i]=math.tan(math.radians(float(s[i][s[i].index("n")+1:])))
+
     stack=[]
     for i in range(len(s)):
         if s[i]=="+":
